@@ -8,13 +8,38 @@
     <title>Document</title>
 </head>
 <body>
-<a href="https://maps.apple.com/?q=東京都港区芝公園４丁目２−８">apple ?q={住所}</a
+apple ?q={住所}: <a href="https://maps.apple.com/?q=" id="apple-q"></a
 >
 <br/>
-<a href="https://maps.apple.com/?address=東京都港区芝公園４丁目２−８">apple ?address={住所}</a
+apple ?address={住所}: <a href="https://maps.apple.com/?address=" id="apple-address"></a
 >
 <br/>
-<a href="https://www.google.co.jp/maps/place/東京都港区芝公園４丁目２−８">google /place/{住所}</a
+google /place/{住所}: <a href="https://www.google.co.jp/maps/place/" id="google"></a
 >
+
+<br>
+<input type="text" id="address" placeholder="住所を変更できます" value="東京都港区芝公園４丁目２−８"><button onclick="setAddress()">Set</button>
+
+<script>
+
+    const addressTemplate = {
+        "apple-q": "https://maps.apple.com/?q=",
+        "apple-address": "https://maps.apple.com/?address=",
+        "google": "https://www.google.co.jp/maps/place/",
+    }
+
+    function setAddress() {
+        const addressInput = document.querySelector('#address')
+        const anchors = document.querySelectorAll('a')
+        console.log(addressInput)
+        const value = addressInput.value
+        anchors.forEach(a => {
+            a.href = `${addressTemplate[a.id]}${value}`
+            a.innerText = value;
+        })
+    }
+
+    setAddress();
+</script>
 </body>
 </html>
